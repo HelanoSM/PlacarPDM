@@ -15,8 +15,9 @@ class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0
         private set
     var isFrozen = false
         private set
+    var isFirstTime = true
+        private set
 
-    private var isFirstTime = true
     private val timer = Timer()
     private val events = HashMap<Int, () -> Unit>()
     private lateinit var onTick: () -> Unit
@@ -41,7 +42,7 @@ class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0
             onTick()
             events[seconds]?.invoke()
 
-            if (tempoSeconds >= tempoDuration + getAcrescimos()) {
+            if (seconds >= tempoDuration + getAcrescimos()) {
                 pause()
             }
         }
@@ -72,6 +73,7 @@ class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0
                     isRunning = true
                     isFirstTime = false
                     tempoSeconds = 0
+                    seconds = 0
                 } else {
                     stop()
                 }
@@ -81,9 +83,9 @@ class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0
 
     fun getAcrescimos(): Int {
         val frozenSeconds = if (isFirstTime) frozenSeconds[0] else frozenSeconds[1]
-        val acrescimos = ((frozenSeconds + 30)/60) * 60
+        val acrescimos = frozenSeconds - (frozenSeconds % 60)
 
-        return acrescimos
+        return Math.min(acrescimos, 10 * 60)
     }
 
     fun setOnTick(onTick: () -> Unit) {

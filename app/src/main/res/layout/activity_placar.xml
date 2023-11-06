@@ -4,8 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/purple_200"
+    android:foregroundTint="@color/purple_200"
     tools:context=".PlacarActivity">
 
+
+    <TextView
+        android:id="@+id/tvNomePartida2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partida"
+        android:textSize="34sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlacar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
 
     <Button
         android:id="@+id/btSalvarPlacar"
@@ -17,29 +33,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
+        app:layout_constraintVertical_bias="0.648" />
 
-    <TextView
-        android:id="@+id/nomestimes1"
-        android:layout_width="249dp"
-        android:layout_height="76dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btSalvarPlacar"
+    <Button
+        android:id="@+id/btVerJogos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="lerUltimosJogos"
+        android:text="Resultado Anterior"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955" />
-
-    <TextView
-        android:id="@+id/nomestimes2"
-        android:layout_width="249dp"
-        android:layout_height="75dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/nomestimes1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintTop_toBottomOf="@+id/btSalvarPlacar" />
 
     <TextView
         android:id="@+id/tvPlacar"
@@ -53,29 +59,71 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.729" />
 
     <TextView
-        android:id="@+id/tvNomePartida2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Partida"
-        android:textSize="34sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlacar"
+        android:id="@+id/nomestimes2"
+        android:layout_width="249dp"
+        android:layout_height="75dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/nomestimes1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.945" />
+
+    <TextView
+        android:id="@+id/nomestimes1"
+        android:layout_width="249dp"
+        android:layout_height="76dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btSalvarPlacar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918" />
+
+    <TextView
+        android:id="@+id/tvCronometroTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:paddingRight="8sp"
+        android:text="1º"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvCronometroDuracao"
+        app:layout_constraintTop_toBottomOf="@+id/btVerJogos" />
+
+    <TextView
+        android:id="@+id/tvCronometroDuracao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="00:00"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btVerJogos" />
+
+    <TextView
+        android:id="@+id/tvCronometroAcresimos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:textSize="34sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/tvCronometroDuracao"
+        app:layout_constraintTop_toBottomOf="@+id/btVerJogos"
+        tools:paddingLeft="8sp" />
 
     <Button
-        android:id="@+id/btVerJogos"
+        android:id="@+id/btnCronometro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:onClick="lerUltimosJogos"
-        android:text="Resultado Anterior"
+        android:layout_marginTop="8dp"
+        android:text="Pausar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btSalvarPlacar" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCronometroDuracao" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,6 @@
 package ufc.smd.esqueleto_placar
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +10,11 @@ import android.os.Vibrator
 
 import android.util.Log
 import android.view.View
-import android.widget.Switch
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.getSystemService
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import data.Cronometro
 import data.Placar
 import java.io.ByteArrayInputStream
@@ -141,17 +141,45 @@ class PlacarActivity : AppCompatActivity() {
     }
 
     fun setupCronometro(bundle: Bundle?) {
-        if (bundle != null) {
+        val btnCronometro = findViewById<Button>(R.id.btnCronometro)
+        bundle?.let {
             cronometro.restoreState(bundle)
+            btnCronometro.text = if (cronometro.isFrozen) "Play" else "Pause"
+        }
+
+        btnCronometro.setOnClickListener {
+            if (cronometro.isFrozen) {
+                cronometro.unfreeze()
+                btnCronometro.text = "Pause"
+            } else {
+                cronometro.freeze()
+                btnCronometro.text = "Play"
+            }
         }
 
         cronometro.setOnTick {
-            Log.v("PDM22", "Tempo: " + cronometro.tempoSeconds)
-//            val tvCronometro = findViewById<TextView>(R.id.tvCronometro)
-//            tvCronometro.text = cronometro.seconds.toString()
+            runOnUiThread {
+                Log.v("PDM22", "Tempo: " + cronometro.tempoSeconds)
+                val segundos = cronometro.seconds % 60
+                val minutos = cronometro.seconds / 60
+                val duracaoText = minutos.toString().padStart(2, '0') +
+                        ":" + segundos.toString().padStart(2, '0')
+                val tvDuracao = findViewById<TextView>(R.id.tvCronometroDuracao)
+                tvDuracao.text = duracaoText
 
-            if ((cronometro.tempoSeconds)/60 >= 42) {
-                Log.v("PDM22", "Acrescimos: " + cronometro.getAcrescimos())
+                val tvAcrescimos = findViewById<TextView>(R.id.tvCronometroAcresimos)
+                if (cronometro.seconds/60 >= 42) {
+                    Log.v("PDM22", "Acrescimos: " + cronometro.getAcrescimos())
+                    val acrescimos = "+${cronometro.getAcrescimos()/60}"
+                    tvAcrescimos.text = acrescimos
+                    tvAcrescimos.visibility = View.VISIBLE
+                } else {
+                    tvAcrescimos.visibility = View.INVISIBLE
+                }
+
+                val tempo = if (cronometro.isFirstTime) "1º" else "2º"
+                val tvTempo = findViewById<TextView>(R.id.tvCronometroTempo)
+                tvTempo.text = tempo
             }
         }
 
