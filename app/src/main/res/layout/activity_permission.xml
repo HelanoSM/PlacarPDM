@@ -7,12 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".PermissionActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bolacampo"
+        android:scaleType="centerCrop"
+        android:alpha="0.7"
+        />
+
     <Button
         android:id="@+id/btLigar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="ligarWhen"
         android:text="Ligações"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -27,6 +36,7 @@
         android:layout_marginTop="200dp"
         android:onClick="getLocal"
         android:text="Localização"
+        android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btLigar" />
