@@ -19,22 +19,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.71" />
 
-    <TextView
+    <Button
         android:id="@+id/nomestimes1"
         android:layout_width="249dp"
         android:layout_height="76dp"
         android:textSize="24sp"
+        android:onClick="alteraPlacar"
         app:layout_constraintBottom_toTopOf="@+id/btSalvarPlacar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.955" />
 
-    <TextView
+    <Button
         android:id="@+id/nomestimes2"
         android:layout_width="249dp"
         android:layout_height="75dp"
         android:textSize="24sp"
+        android:onClick="alteraPlacar"
         app:layout_constraintBottom_toTopOf="@+id/nomestimes1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +47,6 @@
         android:id="@+id/tvPlacar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="alteraPlacar"
         android:text="0 X 0"
         android:textSize="48sp"
         android:textStyle="bold"
