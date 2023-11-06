@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ConfigActivity">
 
+
     <ImageView
         android:id="@+id/imagembola"
         android:layout_width="168dp"

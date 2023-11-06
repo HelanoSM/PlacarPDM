@@ -7,6 +7,14 @@
     tools:context=".PlacarActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/torcida"
+        android:scaleType="centerCrop"
+        android:alpha="0.7"
+        />
+
     <Button
         android:id="@+id/btSalvarPlacar"
         android:layout_width="wrap_content"
