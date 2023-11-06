@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Placar Helano</string>
+    <string name="app_name">Placar Helano e João</string>
     <string name="inputtime1">Digite o nome do Primeiro Time</string>
     <string name="inputtime2">Digite o nome do Segundo Time</string>
     <string name="semPerLigar">Sua aplicação não tem permissão para ligar</string>

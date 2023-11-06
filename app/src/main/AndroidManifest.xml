@@ -7,9 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:allowBackup="true"
-        android:icon="@drawable/bolachutada"
+        android:icon="@drawable/chutandobola"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/bolachutada"
+        android:roundIcon="@drawable/chutandobola"
         android:supportsRtl="true"
         android:theme="@style/Theme.Helano_Placar">
         <activity
