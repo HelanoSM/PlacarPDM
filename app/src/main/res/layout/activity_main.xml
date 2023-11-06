@@ -8,41 +8,42 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imagemcampo"
-        android:src="@drawable/tvbig"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
+        android:id="@+id/imagemfundoini"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:scaleType="centerCrop"
+        android:src="@drawable/luznocampo"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/btIniciar"
         android:layout_width="233dp"
         android:layout_height="83dp"
-        android:layout_marginTop="112dp"
         android:onClick="openConfig"
         android:text="Jogar"
         android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/imagemfundoini"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagemcampo" />
+        app:layout_constraintTop_toBottomOf="@+id/imagemfundoini"
+        app:layout_constraintVertical_bias="0.395" />
 
     <Button
         android:id="@+id/btPreviousGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
         android:onClick="openPreviusGames"
         android:text="Histórico"
-        android:textSize="28sp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btNonSense"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btIniciar" />
+        app:layout_constraintTop_toBottomOf="@+id/btIniciar"
+    />
 
     <Button
         android:id="@+id/btNonSense"
@@ -50,8 +51,9 @@
         android:layout_height="wrap_content"
         android:onClick="openPermission"
         android:text="Permissões"
-        android:textSize="28sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btPreviousGame" />
 </androidx.constraintlayout.widget.ConstraintLayout>
