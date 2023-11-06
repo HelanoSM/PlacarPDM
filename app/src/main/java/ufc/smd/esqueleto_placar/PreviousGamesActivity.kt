@@ -61,7 +61,8 @@ class PreviousGamesActivity : AppCompatActivity() {
             for (i in 1..numMatches) {
                 aux = sp.getString("match" + i, "vazio")!!
                 if (!aux.equals("vazio")) {
-
+                    val time1 = intent.getStringExtra("time1")
+                    val time2 = intent.getStringExtra("time2")
                     var bis: ByteArrayInputStream
                     bis = ByteArrayInputStream(aux.toByteArray(Charsets.ISO_8859_1))
                     var obi: ObjectInputStream
@@ -70,7 +71,7 @@ class PreviousGamesActivity : AppCompatActivity() {
                     var placar: Placar = obi.readObject() as Placar
                     data.add(placar)
                     //Log.v("PDM", "match"+i+" :"+aux)
-                    Log.v("PDM", "Placar: " + placar.nome_partida + " Res:" + placar.resultadoLongo)
+                    Log.v("PDM", "Placar: " + placar.nome_partida + " Res:" + time1 + "X" + time2 + placar.resultadoLongo)
                 }
             }
         }
@@ -88,7 +89,8 @@ class PreviousGamesActivity : AppCompatActivity() {
             for (i in 1..numMatches) {
                 aux = sp.getString("match" + i, "vazio")!!
                 if (!aux.equals("vazio")) {
-
+                    val time1 = intent.getStringExtra("time1")
+                    val time2 = intent.getStringExtra("time2")
                     var bis: ByteArrayInputStream
                     bis = ByteArrayInputStream(aux.toByteArray(Charsets.ISO_8859_1))
                     var obi: ObjectInputStream
@@ -97,7 +99,7 @@ class PreviousGamesActivity : AppCompatActivity() {
                     var placar: Placar = obi.readObject() as Placar
 
                     //Log.v("PDM", "match"+i+" :"+aux)
-                    Log.v("PDM", "Placar: " + placar.nome_partida + " Res:" + placar.resultadoLongo)
+                    Log.v("PDM", "Placar: " + placar.nome_partida + " Res:" + time1 + "X" + time2 + placar.resultadoLongo)
                 }
             }
         }
