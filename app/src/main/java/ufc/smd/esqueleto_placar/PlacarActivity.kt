@@ -12,8 +12,10 @@ import android.os.Vibrator
 
 import android.util.Log
 import android.view.View
+import android.widget.Switch
 import android.widget.TextView
 import androidx.core.content.getSystemService
+import data.Cronometro
 import data.Placar
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -26,6 +28,8 @@ class PlacarActivity : AppCompatActivity() {
     lateinit var tvResultadoJogo: TextView
     var game =0
     var ultimoPlacar: String = "0 X 0"
+    val cronometro = Cronometro(45 * 60, 300.0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
@@ -44,6 +48,14 @@ class PlacarActivity : AppCompatActivity() {
 
         nomeTimes1.text = time1
         nomeTimes2.text = time2
+
+        setupCronometro(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        cronometro.saveState(outState)
+        cronometro.kill()
+        super.onSaveInstanceState(outState)
     }
 
     fun alteraPlacar (v:View){
@@ -126,5 +138,28 @@ class PlacarActivity : AppCompatActivity() {
             Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultado)
         }
 
+    }
+
+    fun setupCronometro(bundle: Bundle?) {
+        if (bundle != null) {
+            cronometro.restoreState(bundle)
+        }
+
+        cronometro.setOnTick {
+            Log.v("PDM22", "Tempo: " + cronometro.tempoSeconds)
+//            val tvCronometro = findViewById<TextView>(R.id.tvCronometro)
+//            tvCronometro.text = cronometro.seconds.toString()
+
+            if ((cronometro.tempoSeconds)/60 >= 42) {
+                Log.v("PDM22", "Acrescimos: " + cronometro.getAcrescimos())
+            }
+        }
+
+        cronometro.addEvent(-1) {
+            Log.v("PDM22", "Fim da partida")
+            // finalizar a partida
+        }
+
+        cronometro.start()
     }
 }
