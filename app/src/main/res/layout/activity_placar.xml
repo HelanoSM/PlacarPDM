@@ -8,6 +8,15 @@
     android:foregroundTint="@color/purple_200"
     tools:context=".PlacarActivity">
 
+    <ImageView
+        android:id="@+id/imagemfundoini"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:scaleType="centerCrop"
+        android:src="@drawable/torcida"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/tvNomePartida2"
@@ -60,7 +69,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.729" />
 
-    <TextView
+    <Button
         android:id="@+id/nomestimes2"
         android:layout_width="249dp"
         android:layout_height="75dp"
@@ -71,7 +80,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.945" />
 
-    <TextView
+    <Button
         android:id="@+id/nomestimes1"
         android:layout_width="249dp"
         android:layout_height="76dp"

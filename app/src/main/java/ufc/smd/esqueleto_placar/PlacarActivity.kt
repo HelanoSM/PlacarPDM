@@ -10,7 +10,6 @@ import android.os.Vibrator
 import android.widget.Button
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.getSystemService
@@ -32,7 +31,6 @@ class PlacarActivity : AppCompatActivity() {
     var golsTimeDois = 0
     var ultimoPlacar = "$golsTimeUm X $golsTimeDois"
 
-    var ultimoPlacar: String = "0 X 0"
     val cronometro = Cronometro(45 * 60, 300.0)
 
 
@@ -56,16 +54,6 @@ class PlacarActivity : AppCompatActivity() {
         nomeTimes1.text = time1
         nomeTimes2.text = time2
 
-        setupCronometro(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        cronometro.saveState(outState)
-        cronometro.kill()
-        super.onSaveInstanceState(outState)
-    }
-
-
         nomeTimes1.setOnClickListener {
             golsTimeUm++
             atualizaPlacar()
@@ -75,9 +63,16 @@ class PlacarActivity : AppCompatActivity() {
             golsTimeDois++
             atualizaPlacar()
         }
+        setupCronometro(savedInstanceState)
+
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        cronometro.saveState(outState)
+        cronometro.kill()
+        super.onSaveInstanceState(outState)
+    }
     private fun atualizaPlacar() {
         val placarFormatado = String.format("%d X %d", golsTimeUm, golsTimeDois)
         placar.resultado = placarFormatado
@@ -213,4 +208,6 @@ class PlacarActivity : AppCompatActivity() {
 
         cronometro.start()
     }
+
+
 }
