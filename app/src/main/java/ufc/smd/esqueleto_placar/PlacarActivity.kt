@@ -1,8 +1,6 @@
 package ufc.smd.esqueleto_placar
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +10,12 @@ import android.os.Vibrator
 import android.widget.Button
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.getSystemService
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import data.Cronometro
 import data.Placar
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -25,9 +27,15 @@ class PlacarActivity : AppCompatActivity() {
     lateinit var placar:Placar
     lateinit var tvResultadoJogo: TextView
     var game =0
+
     var golsTimeUm = 0
     var golsTimeDois = 0
     var ultimoPlacar = "$golsTimeUm X $golsTimeDois"
+
+    var ultimoPlacar: String = "0 X 0"
+    val cronometro = Cronometro(45 * 60, 300.0)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placar)
@@ -47,6 +55,16 @@ class PlacarActivity : AppCompatActivity() {
 
         nomeTimes1.text = time1
         nomeTimes2.text = time2
+
+        setupCronometro(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        cronometro.saveState(outState)
+        cronometro.kill()
+        super.onSaveInstanceState(outState)
+    }
+
 
         nomeTimes1.setOnClickListener {
             golsTimeUm++
@@ -143,5 +161,56 @@ class PlacarActivity : AppCompatActivity() {
             Log.v("PDM22", "Jogo Salvo:"+ prevPlacar.resultado)
         }
 
+    }
+
+    fun setupCronometro(bundle: Bundle?) {
+        val btnCronometro = findViewById<Button>(R.id.btnCronometro)
+        bundle?.let {
+            cronometro.restoreState(bundle)
+            btnCronometro.text = if (cronometro.isFrozen) "Play" else "Pause"
+        }
+
+        btnCronometro.setOnClickListener {
+            if (cronometro.isFrozen) {
+                cronometro.unfreeze()
+                btnCronometro.text = "Pause"
+            } else {
+                cronometro.freeze()
+                btnCronometro.text = "Play"
+            }
+        }
+
+        cronometro.setOnTick {
+            runOnUiThread {
+                Log.v("PDM22", "Tempo: " + cronometro.tempoSeconds)
+                val segundos = cronometro.seconds % 60
+                val minutos = cronometro.seconds / 60
+                val duracaoText = minutos.toString().padStart(2, '0') +
+                        ":" + segundos.toString().padStart(2, '0')
+                val tvDuracao = findViewById<TextView>(R.id.tvCronometroDuracao)
+                tvDuracao.text = duracaoText
+
+                val tvAcrescimos = findViewById<TextView>(R.id.tvCronometroAcresimos)
+                if (cronometro.seconds/60 >= 42) {
+                    Log.v("PDM22", "Acrescimos: " + cronometro.getAcrescimos())
+                    val acrescimos = "+${cronometro.getAcrescimos()/60}"
+                    tvAcrescimos.text = acrescimos
+                    tvAcrescimos.visibility = View.VISIBLE
+                } else {
+                    tvAcrescimos.visibility = View.INVISIBLE
+                }
+
+                val tempo = if (cronometro.isFirstTime) "1º" else "2º"
+                val tvTempo = findViewById<TextView>(R.id.tvCronometroTempo)
+                tvTempo.text = tempo
+            }
+        }
+
+        cronometro.addEvent(-1) {
+            Log.v("PDM22", "Fim da partida")
+            // finalizar a partida
+        }
+
+        cronometro.start()
     }
 }
