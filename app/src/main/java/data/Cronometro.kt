@@ -4,7 +4,7 @@ import android.os.Bundle
 import java.util.Timer
 import java.util.TimerTask
 
-class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0) {
+class Cronometro(private val speed: Double = 1.0) {
     var seconds = 0
         private set
     var tempoSeconds = 0
@@ -42,7 +42,7 @@ class Cronometro(private val tempoDuration: Int, private val speed: Double = 1.0
             onTick()
             events[seconds]?.invoke()
 
-            if (seconds >= tempoDuration + getAcrescimos()) {
+            if (seconds >= (45 * 60) + getAcrescimos()) {
                 pause()
             }
         }

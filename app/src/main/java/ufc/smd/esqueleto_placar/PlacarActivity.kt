@@ -10,11 +10,8 @@ import android.os.Vibrator
 import android.widget.Button
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.getSystemService
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import data.Cronometro
 import data.Placar
 import java.io.ByteArrayInputStream
@@ -30,7 +27,7 @@ class PlacarActivity : AppCompatActivity() {
     var golsTimeUm = 0
     var golsTimeDois = 0
     var ultimoPlacar = "$golsTimeUm X $golsTimeDois"
-    val cronometro = Cronometro(45 * 60, 300.0)
+    val cronometro = Cronometro(300.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,15 +49,6 @@ class PlacarActivity : AppCompatActivity() {
         nomeTimes1.text = time1
         nomeTimes2.text = time2
 
-        setupCronometro(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        cronometro.saveState(outState)
-        cronometro.kill()
-        super.onSaveInstanceState(outState)
-    }
-
         nomeTimes1.setOnClickListener {
             golsTimeUm++
             atualizaPlacar()
@@ -71,6 +59,13 @@ class PlacarActivity : AppCompatActivity() {
             atualizaPlacar()
         }
 
+        setupCronometro(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        cronometro.saveState(outState)
+        cronometro.kill()
+        super.onSaveInstanceState(outState)
     }
 
     private fun atualizaPlacar() {
